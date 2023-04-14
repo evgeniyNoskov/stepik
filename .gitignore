@@ -1,0 +1,4 @@
+__pycache__
+.pytest_cache
+/selenium_course/cred.json
+selenium_course/environments
