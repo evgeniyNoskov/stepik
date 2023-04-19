@@ -3,31 +3,32 @@ from selenium.webdriver.common.by import By
 import time
 import math
 
+def calc(x):
+  return str(math.log(abs(12*math.sin(int(x)))))         # добавляем к этому пути имя файла  
+
 try: 
-    link = "http://suninjuly.github.io/execute_script.html"
+    link = "http://suninjuly.github.io/alert_accept.html"
     browser = webdriver.Chrome()
     browser.get(link)
 
+    button = browser.find_element(By.CSS_SELECTOR, "button")
+    button.click()  
+
+    confirm = browser.switch_to.alert
+    confirm.accept()
+    
     x_element = browser.find_element(By.ID, 'input_value')
     x = x_element.text
     y = calc(x)
-
+    
     input = browser.find_element(By.ID, "answer")
     input.send_keys(y)
 
-    browser.execute_script("window.scrollBy(0, 300);")
-
-    option1 = browser.find_element(By.CSS_SELECTOR, "label[for='robotCheckbox']")
-    option1.click()
-
-    option2 = browser.find_element(By.CSS_SELECTOR, "label[for='robotsRule']")
-    option2.click()    
-
     button = browser.find_element(By.CSS_SELECTOR, "button")
     button.click()  
-     
+
 finally:
     # ожидание чтобы визуально оценить результаты прохождения скрипта
-    time.sleep(30)
+    time.sleep(10)
     # закрываем браузер после всех манипуляций
     browser.quit()
